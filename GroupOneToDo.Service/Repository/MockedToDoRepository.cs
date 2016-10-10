@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GroupOneToDo.Commons;
 using GroupOneToDo.Model;
 
 namespace GroupOneToDo.Service.Repository
