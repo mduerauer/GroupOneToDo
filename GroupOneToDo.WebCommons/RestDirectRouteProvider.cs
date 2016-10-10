@@ -2,7 +2,7 @@
 using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
 
-namespace GroupOneToDo.WebService
+namespace GroupOneToDo.WebCommons
 {
     public class RestDirectRouteProvider : DefaultDirectRouteProvider
     {

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupOneToDo.Service", "Gro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupOneToDo.WebService", "GroupOneToDo.WebService\GroupOneToDo.WebService.csproj", "{B8314E1D-FC41-4FA0-BA5A-EB8AB4BCC573}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupOneToDo.WebUI", "GroupOneToDo.WebUI\GroupOneToDo.WebUI.csproj", "{54045E9C-73D0-4C1E-B4FC-94E4EC7EFE7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupOneToDo.WebCommons", "GroupOneToDo.WebCommons\GroupOneToDo.WebCommons.csproj", "{FA9A4CE6-1F21-4ABF-A812-C3595AF623A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{B8314E1D-FC41-4FA0-BA5A-EB8AB4BCC573}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8314E1D-FC41-4FA0-BA5A-EB8AB4BCC573}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8314E1D-FC41-4FA0-BA5A-EB8AB4BCC573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54045E9C-73D0-4C1E-B4FC-94E4EC7EFE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54045E9C-73D0-4C1E-B4FC-94E4EC7EFE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54045E9C-73D0-4C1E-B4FC-94E4EC7EFE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54045E9C-73D0-4C1E-B4FC-94E4EC7EFE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9A4CE6-1F21-4ABF-A812-C3595AF623A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9A4CE6-1F21-4ABF-A812-C3595AF623A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9A4CE6-1F21-4ABF-A812-C3595AF623A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9A4CE6-1F21-4ABF-A812-C3595AF623A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

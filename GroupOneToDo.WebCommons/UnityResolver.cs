@@ -4,7 +4,7 @@ using System.Web.Http.Dependencies;
 using Microsoft.Practices.Unity;
 using NLog;
 
-namespace GroupOneToDo.WebService
+namespace GroupOneToDo.WebCommons
 {
     public class UnityResolver : IDependencyResolver
     {
