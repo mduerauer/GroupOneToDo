@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GroupOneToDo.WebService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EndPointURI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://fhstp-mis16-gr1-todo.documents.azure.com:443/</Value>
+    </Setting>
+    <Setting Name="PrimaryKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">kulnW35zPW3wzCFSFuf0A25EqoTwPK5u8gX9cMBcwndMHtSeRN1CNtirsH882u3zTEervjppCdHz5LisJ3dCpQ</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
