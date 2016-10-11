@@ -1,4 +1,4 @@
-﻿//#define MOCK
+﻿#define MOCK
 
 using GroupOneToDo.Service.Repository;
 using Microsoft.Practices.Unity;
