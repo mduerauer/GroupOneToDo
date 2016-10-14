@@ -11,7 +11,7 @@ namespace GroupOneToDo.WebService.Controllers.Api
     {
         // Das Repository wird per Unity Dependency Injection eingefügt
         private readonly IToDoRepository _repository;
-        public override IRepository<ToDo, Guid> Repository => _repository;
+        public override IAsyncRepository<ToDo, Guid> Repository => _repository;
 
         public ToDoApiController(IToDoRepository repository)
         {

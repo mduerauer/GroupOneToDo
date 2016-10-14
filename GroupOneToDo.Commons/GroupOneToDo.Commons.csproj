@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="IIdentifiable.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="IAsyncRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

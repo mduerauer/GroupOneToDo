@@ -28,28 +28,25 @@ namespace GroupOneToDo.Service.Repository
 
             Logger.Info("Creating DocumentCollection if not exists.");
             var collectionResponse = CreateDocumentCollectionIfNotExists(DatabaseName, CollectionName).Result;
-            
-            var x = new ToDo(Guid.NewGuid()) { Task = "test123" };
-            Save(x);
 
         }
         
-        public ToDo GetById(Guid id)
+        public async Task<ToDo> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<ToDo> FindAll()
+        public async Task<ICollection<ToDo>> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Save(ToDo entity)
+        public async Task<ToDo> Save(ToDo entity)
         {
             throw new NotImplementedException();
         }
 
-        public ToDo DeleteById(Guid id)
+        public async Task<ToDo> DeleteById(Guid id)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GroupOneToDo.Model;
+using System.Threading.Tasks;
 
 namespace GroupOneToDo.Service.Repository
 {
@@ -19,7 +20,7 @@ namespace GroupOneToDo.Service.Repository
             }
         }
 
-        private ToDo MakeTodo(int c)
+        private static ToDo MakeTodo(int c)
         {
             var user = new User("user " + c%2);
 
@@ -35,24 +36,32 @@ namespace GroupOneToDo.Service.Repository
             return todo;
         }
 
-        public ToDo GetById(Guid id)
+        public async Task<ToDo> GetById(Guid id)
         {
-            return _data.ContainsKey(id) ? _data[id] : null;
+            return await Task.FromResult<ToDo>(_data.ContainsKey(id) ? _data[id] : null);
         }
 
-        public ICollection<ToDo> FindAll()
+        public async Task<ICollection<ToDo>> FindAll()
         {
-            return _data.Values;
+            return await Task.FromResult<ICollection<ToDo>>(_data.Values);
         }
 
-        public ToDo DeleteById(Guid id)
+        public async Task<ToDo> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await GetById(id);
+    
+            if(result != null) { 
+                _data.Remove(id);
+                return await Task.FromResult<ToDo>(result);
+            }
+
+            return await Task.FromResult<ToDo>(null);
         }
 
-        public void Save(ToDo entity)
+        public async Task<ToDo> Save(ToDo entity)
         {
             _data.Add(entity.Id, entity);
+            return await Task.FromResult<ToDo>(entity);
         }
     }
 }

@@ -4,7 +4,7 @@ using GroupOneToDo.Model;
 
 namespace GroupOneToDo.Service.Repository
 {
-    public interface IToDoRepository : IRepository<ToDo, Guid>
+    public interface IToDoRepository : IAsyncRepository<ToDo, Guid>
     {
 
     }
