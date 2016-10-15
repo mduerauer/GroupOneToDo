@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using System.Configuration;
 using GroupOneToDo.WebCommons;
 using GroupOneToDo.Service.Repository;
+using GroupOneToDo.WebUI.Controllers;
 
 namespace GroupOneToDo.WebUI
 {
@@ -15,7 +16,7 @@ namespace GroupOneToDo.WebUI
             // Mocked Repository
             #if MOCK
             container.RegisterSingleton<IToDoRepository, MockedToDoRepository>();
-            #else
+#else
 
             // DocumentDB Repository
             var endPointUri = GetCustomSetting("applicationSettings/AzureConnectionSettings",
@@ -24,7 +25,9 @@ namespace GroupOneToDo.WebUI
                 "PrimaryKey");
 
             container.RegisterSingleton<IToDoRepository, DocumentDbToDoRepository>(new InjectionConstructor(endPointUri, primaryKey));
-            #endif
+#endif
+
+            container.RegisterType<AccountController>(new InjectionConstructor());
         }
 
         protected static string GetCustomSetting(string section, string setting)
