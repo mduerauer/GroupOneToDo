@@ -4,6 +4,7 @@ using GroupOneToDo.Service.Repository;
 using Microsoft.Practices.Unity;
 using System.Configuration;
 using GroupOneToDo.WebCommons;
+using GroupOneToDo.Service;
 
 namespace GroupOneToDo.WebService
 {
@@ -15,6 +16,7 @@ namespace GroupOneToDo.WebService
             // Mocked Repository
             #if MOCK
             container.RegisterSingleton<IToDoRepository, MockedToDoRepository>();
+            container.RegisterType<IToDoService, MockedToDoService>();
             #else
 
             // DocumentDB Repository
@@ -22,8 +24,11 @@ namespace GroupOneToDo.WebService
                 "EndPointURI");
             var primaryKey = GetCustomSetting("applicationSettings/AzureConnectionSettings",
                 "PrimaryKey");
+            var sendGridApiKey = GetCustomSetting("applicationSettings/SendGridSettings",
+                "ApiKey");
 
             container.RegisterSingleton<IToDoRepository, DocumentDbToDoRepository>(new InjectionConstructor(endPointUri, primaryKey));
+            container.RegisterType<IToDoService, SendGridToDoService>(new InjectionConstructor(sendGridApiKey));
             #endif
         }
 

@@ -5,6 +5,9 @@ using GroupOneToDo.Model;
 using GroupOneToDo.Service.Repository;
 using NLog;
 using GroupOneToDo.Service;
+using System.Net.Http;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace GroupOneToDo.WebService.Controllers.Api
 {
@@ -50,6 +53,31 @@ namespace GroupOneToDo.WebService.Controllers.Api
 
             // Nach dem Löschen eines ToDos sofort eMail-Notification verschicken.
             _service.Notify(entity, NotificationType.ToDoRemoved);
+        }
+
+
+        [HttpGet]
+        [Route("_notifyAll")]
+        public async Task<HttpResponseMessage> NotifyAll(string apiKey)
+        {
+            HttpResponseMessage response;
+
+            try
+            {
+
+                // TODO: Check if apiKey is valid
+
+
+                await _service.NotifyAll();
+
+                response = Request.CreateResponse(HttpStatusCode.OK, "ok");
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.BadRequest, e);
+            }
+
+            return response;
         }
 
     }
