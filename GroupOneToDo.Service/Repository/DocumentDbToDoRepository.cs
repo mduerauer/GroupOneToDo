@@ -41,7 +41,12 @@ namespace GroupOneToDo.Service.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<ToDo> Save(ToDo entity)
+        public async Task<ToDo> Create(ToDo entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ToDo> Update(ToDo entity)
         {
             throw new NotImplementedException();
         }

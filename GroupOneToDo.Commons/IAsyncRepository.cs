@@ -9,7 +9,9 @@ namespace GroupOneToDo.Commons
 
         Task<ICollection<TEntity>> FindAll();
 
-        Task<TEntity> Save(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
+
+        Task<TEntity> Update(TEntity entity);
 
         Task<TEntity> DeleteById(TId id);
 

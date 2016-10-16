@@ -16,7 +16,7 @@ namespace GroupOneToDo.Service.Repository
 
             for (var i = 0; i < 10; i++)
             {
-                Save(MakeTodo(i));
+                Create(MakeTodo(i));
             }
         }
 
@@ -59,9 +59,15 @@ namespace GroupOneToDo.Service.Repository
             return await Task.FromResult<ToDo>(null);
         }
 
-        public async Task<ToDo> Save(ToDo entity)
+        public async Task<ToDo> Create(ToDo entity)
         {
             _data.Add(entity.Id, entity);
+            return await Task.FromResult<ToDo>(entity);
+        }
+
+        public async Task<ToDo> Update(ToDo entity)
+        {
+            _data[entity.Id] = entity;
             return await Task.FromResult<ToDo>(entity);
         }
     }

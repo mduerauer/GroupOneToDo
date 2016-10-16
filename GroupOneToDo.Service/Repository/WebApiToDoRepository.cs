@@ -35,9 +35,16 @@ namespace GroupOneToDo.Service.Repository
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public Task<ToDo> DeleteById(Guid id)
+        public async Task<ToDo> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+            ToDo todo = await GetById(id);
+            HttpResponseMessage response = await _httpClient.DeleteAsync(_baseUrl + "/" + id.ToString());
+
+            if (!response.IsSuccessStatusCode)
+            {
+                todo = null;
+            }
+            return todo;
         }
 
         public async Task<ICollection<ToDo>> FindAll()
@@ -51,14 +58,31 @@ namespace GroupOneToDo.Service.Repository
             return todos;
         }
 
-        public Task<ToDo> GetById(Guid id)
+        public async Task<ToDo> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            ToDo todo = null;
+            HttpResponseMessage response = await _httpClient.GetAsync(_baseUrl + "/" + id.ToString());
+            if (response.IsSuccessStatusCode)
+            {
+                todo = await response.Content.ReadAsAsync<ToDo>();
+            }
+            return todo;
         }
 
-        public Task<ToDo> Save(ToDo entity)
+        public async Task<ToDo> Create(ToDo entity)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(_baseUrl, entity);
+            response.EnsureSuccessStatusCode();
+            
+            return entity;
+        }
+
+        public async Task<ToDo> Update(ToDo entity)
+        {
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync(_baseUrl + "/" + entity.Id.ToString(), entity);
+            response.EnsureSuccessStatusCode();
+            
+            return entity;
         }
     }
 }

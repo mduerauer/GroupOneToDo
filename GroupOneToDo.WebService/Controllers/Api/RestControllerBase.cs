@@ -79,7 +79,7 @@ namespace GroupOneToDo.WebService.Controllers.Api
             {
                 if (!BeforeInsert(entity)) throw new Exception("BeforeInsert failed.");
 
-                var result = await Repository.Save(entity);
+                var result = await Repository.Create(entity);
 
                 AfterInsert(result);
 
@@ -103,7 +103,7 @@ namespace GroupOneToDo.WebService.Controllers.Api
             {
 
                 if (!BeforeUpdate(entity)) throw new Exception("BeforeUpdate failed.");
-                var result = await Repository.Save(entity);
+                var result = await Repository.Update(entity);
 
                 AfterUpdate(result);
 
