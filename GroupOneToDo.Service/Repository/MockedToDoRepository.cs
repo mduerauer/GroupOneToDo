@@ -24,8 +24,9 @@ namespace GroupOneToDo.Service.Repository
         {
             var user = new User("user " + c%2);
 
-            var todo = new ToDo(Guid.NewGuid())
+            var todo = new ToDo()
             {
+                Id = Guid.NewGuid(),
                 CreatedWhen = new DateTime(),
                 Task = "A simple task " + c,
                 DueDateTime = DateTime.Now.AddDays(c%3),

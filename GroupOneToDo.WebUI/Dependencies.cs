@@ -1,30 +1,27 @@
-﻿#define MOCK
+﻿//#define MOCK
 
 using Microsoft.Practices.Unity;
 using System.Configuration;
-using GroupOneToDo.WebCommons;
 using GroupOneToDo.Service.Repository;
 using GroupOneToDo.WebUI.Controllers;
+using GroupOneToDo.WebCommons;
 
 namespace GroupOneToDo.WebUI
 {
     public class Dependencies
     {
 
+        public static readonly string BaseUrl = "https://fhstp-mis16-gr1-api.azurewebsites.net/api/todo";
+
         public static void Register(IUnityContainer container)
         {
             // Mocked Repository
-            #if MOCK
+#if MOCK
             container.RegisterSingleton<IToDoRepository, MockedToDoRepository>();
 #else
 
-            // DocumentDB Repository
-            var endPointUri = GetCustomSetting("applicationSettings/AzureConnectionSettings",
-                "EndPointURI");
-            var primaryKey = GetCustomSetting("applicationSettings/AzureConnectionSettings",
-                "PrimaryKey");
-
-            container.RegisterSingleton<IToDoRepository, DocumentDbToDoRepository>(new InjectionConstructor(endPointUri, primaryKey));
+            // WebAPI Repository
+            container.RegisterSingleton<IToDoRepository, WebApiToDoRepository>(new InjectionConstructor(BaseUrl));
 #endif
 
             container.RegisterType<AccountController>(new InjectionConstructor());

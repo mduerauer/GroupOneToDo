@@ -1,11 +1,6 @@
-﻿using GroupOneToDo.Commons;
-
-namespace GroupOneToDo.Model
+﻿namespace GroupOneToDo.Model
 {
-    public interface IPrincipal : IIdentifiable<string>
+    interface IPrincipal
     {
-
-        string FullName { get; set; }
-
     }
 }

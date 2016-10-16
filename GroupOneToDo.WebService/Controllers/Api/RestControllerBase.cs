@@ -53,15 +53,21 @@ namespace GroupOneToDo.WebService.Controllers.Api
             return response;
         }
 
+        public virtual void AfterInsert(TAggregateType entity) { }
+
         public virtual bool BeforeInsert(TAggregateType entity)
         {
             return true;
         }
 
+        public virtual void AfterUpdate(TAggregateType entity) { }
+
         public virtual bool BeforeUpdate(TAggregateType entity)
         {
             return true;
         }
+
+        public virtual void AfterDelete(TAggregateType entity) { }
 
         [HttpPost]
         [Route()]
@@ -74,6 +80,9 @@ namespace GroupOneToDo.WebService.Controllers.Api
                 if (!BeforeInsert(entity)) throw new Exception("BeforeInsert failed.");
 
                 var result = await Repository.Save(entity);
+
+                AfterInsert(result);
+
                 response = Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception e)
@@ -95,6 +104,9 @@ namespace GroupOneToDo.WebService.Controllers.Api
 
                 if (!BeforeUpdate(entity)) throw new Exception("BeforeUpdate failed.");
                 var result = await Repository.Save(entity);
+
+                AfterUpdate(result);
+
                 response = Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception e)
@@ -114,6 +126,9 @@ namespace GroupOneToDo.WebService.Controllers.Api
             try
             {
                 TAggregateType data = await Repository.DeleteById(id);
+
+                AfterDelete(data);
+
                 response = Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
