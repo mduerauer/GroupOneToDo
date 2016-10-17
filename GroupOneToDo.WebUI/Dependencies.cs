@@ -1,4 +1,4 @@
-﻿//#define MOCK
+﻿#define MOCK
 
 using Microsoft.Practices.Unity;
 using System.Configuration;

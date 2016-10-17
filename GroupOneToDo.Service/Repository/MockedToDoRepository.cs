@@ -22,16 +22,15 @@ namespace GroupOneToDo.Service.Repository
 
         private static ToDo MakeTodo(int c)
         {
-            var user = new User("user " + c%2);
 
             var todo = new ToDo()
             {
                 Id = Guid.NewGuid(),
-                CreatedWhen = new DateTime(),
+                CreatedWhen = DateTime.Now.AddDays(-1),
                 Task = "A simple task " + c,
                 DueDateTime = DateTime.Now.AddDays(c%3),
-                AssignedTo = user,
-                CreatedBy = user
+                AssignedTo = "user " + c % 2,
+                CreatedBy = "user " + c % 2
             };
 
             return todo;

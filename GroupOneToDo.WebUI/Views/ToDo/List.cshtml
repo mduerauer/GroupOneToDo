@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CreatedWhen)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedWhen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

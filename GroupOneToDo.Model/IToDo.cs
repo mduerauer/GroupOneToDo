@@ -9,9 +9,9 @@ namespace GroupOneToDo.Model
 
         DateTime DueDateTime { get; set; }
 
-        User AssignedTo { get; set; }
+        string AssignedTo { get; set; }
 
-        User CreatedBy { get; set; }
+        string CreatedBy { get; set; }
 
         DateTime CreatedWhen { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace GroupOneToDo.Model
 {
@@ -10,11 +11,12 @@ namespace GroupOneToDo.Model
 
         public string Task { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DueDateTime { get; set; }
+        
+        public string AssignedTo { get; set; }
 
-        public User AssignedTo { get; set; }
-
-        public User CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         public DateTime CreatedWhen { get; set; }
 

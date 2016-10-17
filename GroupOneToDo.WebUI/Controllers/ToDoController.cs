@@ -1,4 +1,5 @@
-﻿using GroupOneToDo.Service.Repository;
+﻿using GroupOneToDo.Model;
+using GroupOneToDo.Service.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,10 @@ namespace GroupOneToDo.WebUI.Controllers
         // GET: ToDo/Create
         public ActionResult Create()
         {
-            return View();
+            var x = new ToDo();
+            x.CreatedBy = User.Identity.Name;
+            x.CreatedWhen = DateTime.Now.Date;
+            return View(x);
         }
 
         // POST: ToDo/Create
