@@ -15,6 +15,8 @@ namespace GroupOneToDo.WebService.Controllers.Api
     public class ToDoApiController : RestControllerBase<ToDo, Guid>
     {
 
+        public static readonly string NotificationToken = "test123";
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         // Das Repository wird per Unity Dependency Injection eingefügt
@@ -58,16 +60,19 @@ namespace GroupOneToDo.WebService.Controllers.Api
 
         [HttpGet]
         [Route("_notifyAll")]
-        public async Task<HttpResponseMessage> NotifyAll(string apiKey)
+        public async Task<HttpResponseMessage> NotifyAll(string token)
         {
             HttpResponseMessage response;
 
+            // TODO: Check if apiKey is valid
+            if (!token.Equals(NotificationToken))
+            {
+                response = Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Token not valid.");
+                return response;
+            }
+
             try
             {
-
-                // TODO: Check if apiKey is valid
-
-
                 await _service.NotifyAll();
 
                 response = Request.CreateResponse(HttpStatusCode.OK, "ok");

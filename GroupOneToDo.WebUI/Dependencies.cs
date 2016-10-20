@@ -1,4 +1,4 @@
-﻿#define MOCK
+﻿//#define MOCK
 
 using Microsoft.Practices.Unity;
 using System.Configuration;
@@ -22,8 +22,18 @@ namespace GroupOneToDo.WebUI
 
             // WebAPI Repository
             container.RegisterSingleton<IToDoRepository, WebApiToDoRepository>(new InjectionConstructor(BaseUrl));
-#endif
 
+            // DocumentDB Repository
+            /*
+            var endPointUri = GetCustomSetting("applicationSettings/AzureConnectionSettings",
+                "EndPointURI");
+            var primaryKey = GetCustomSetting("applicationSettings/AzureConnectionSettings",
+                "PrimaryKey");
+
+            container.RegisterSingleton<IToDoRepository, DocumentDbToDoRepository>(new InjectionConstructor(endPointUri, primaryKey));
+            */
+
+#endif
             container.RegisterType<AccountController>(new InjectionConstructor());
         }
 

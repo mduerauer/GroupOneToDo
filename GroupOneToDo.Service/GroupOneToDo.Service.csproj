@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISendGridToDoSettings.cs" />
     <Compile Include="IToDoService.cs" />
     <Compile Include="NotificationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="MockedToDoService.cs" />
     <Compile Include="Repository\WebApiToDoRepository.cs" />
     <Compile Include="SendGridToDoService.cs" />
+    <Compile Include="SendGridToDoSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GroupOneToDo.Commons\GroupOneToDo.Commons.csproj">

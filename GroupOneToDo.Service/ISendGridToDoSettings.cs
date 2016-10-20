@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace GroupOneToDo.Service
 {
-    public enum NotificationType
+    public interface ISendGridToDoSettings
     {
 
-        ToDoCreated,
-        ToDoChanged,
-        ToDoRemoved,
-        ToDoReminder
+        string ApiKey { get; set; }
 
     }
 }

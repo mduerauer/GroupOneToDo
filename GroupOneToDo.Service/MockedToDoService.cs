@@ -1,12 +1,18 @@
 ﻿using System.Threading.Tasks;
 using GroupOneToDo.Model;
 using NLog;
+using GroupOneToDo.Service.Repository;
 
 namespace GroupOneToDo.Service
 {
     public class MockedToDoService : IToDoService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public MockedToDoService(IToDoRepository repository)
+        {
+
+        }
 
         public async Task Notify(ToDo toDo, NotificationType notificationType)
         {

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using NLog;
+using System.Linq;
+using Microsoft.Azure.Documents.Linq;
 
 namespace GroupOneToDo.Service.Repository
 {
@@ -33,27 +35,82 @@ namespace GroupOneToDo.Service.Repository
         
         public async Task<ToDo> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            ToDo result = null;
+
+            FeedOptions queryOptions = new FeedOptions { MaxItemCount = 1 };
+
+            var documentQuery = _documentClient.CreateDocumentQuery<ToDo>(
+                UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName), queryOptions).AsDocumentQuery();
+
+            if(documentQuery.HasMoreResults)
+            {
+                foreach (var b in await documentQuery.ExecuteNextAsync<ToDo>())
+                {
+                    result = b;
+                    break;
+                }
+            }
+
+            return result;
+
         }
 
         public async Task<ICollection<ToDo>> FindAll()
         {
-            throw new NotImplementedException();
+            var result = new List<ToDo>();
+
+            FeedOptions queryOptions = new FeedOptions { MaxItemCount = -1 };
+
+            var documentQuery = _documentClient.CreateDocumentQuery<ToDo>(
+                UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName), queryOptions).AsDocumentQuery();
+
+            while(documentQuery.HasMoreResults)
+            {
+                foreach(var b in await documentQuery.ExecuteNextAsync<ToDo>())
+                {
+                    result.Add(b);
+                }
+            }
+
+            return result;
+
         }
+
+        
 
         public async Task<ToDo> Create(ToDo entity)
         {
-            throw new NotImplementedException();
+            await this._documentClient.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseName, CollectionName), entity);
+
+            return entity;
         }
 
         public async Task<ToDo> Update(ToDo entity)
         {
-            throw new NotImplementedException();
+            
+            await this._documentClient.ReplaceDocumentAsync(GetDocumentUriForEntity(entity), entity);
+
+            return entity;
         }
 
         public async Task<ToDo> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+
+            var deleted = await GetById(id);
+
+            if(deleted != null)
+            {
+                await _documentClient.DeleteDocumentAsync(GetDocumentUriForEntity(deleted));
+            }
+
+            return deleted;
+        }
+
+        private Uri GetDocumentUriForEntity(ToDo entity)
+        {
+                var documentUri = UriFactory.CreateDocumentUri(DatabaseName, CollectionName, entity.Id.ToString());
+
+            return documentUri;
         }
 
         private async Task<ResourceResponse<Database>>  CreateDatabaseIfNotExists(string databaseName)

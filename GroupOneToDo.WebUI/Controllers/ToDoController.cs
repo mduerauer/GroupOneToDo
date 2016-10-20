@@ -1,5 +1,6 @@
 ﻿using GroupOneToDo.Model;
 using GroupOneToDo.Service.Repository;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace GroupOneToDo.WebUI.Controllers
 {
     public class ToDoController : Controller
     {
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly IToDoRepository _todoRepository;
 
         public ToDoController(IToDoRepository todoRepository)
@@ -32,30 +36,51 @@ namespace GroupOneToDo.WebUI.Controllers
         // GET: ToDo/Details/5
         public async Task<ActionResult> Details(Guid id)
         {
-            return View(await _todoRepository.GetById(id));
+
+            var todo = await _todoRepository.GetById(id);
+
+            return View(todo);
         }
 
         // GET: ToDo/Create
         public ActionResult Create()
         {
-            var x = new ToDo();
-            x.CreatedBy = User.Identity.Name;
-            x.CreatedWhen = DateTime.Now.Date;
-            return View(x);
+            var template = new ToDo()
+            {
+                CreatedBy = User.Identity.Name,
+                CreatedWhen = DateTime.Now
+
+            };
+
+            return View(template);
         }
 
         // POST: ToDo/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
 
+                ToDo todo = new ToDo(Guid.NewGuid())
+                {
+                    Task = collection["Task"],
+                    DueDateTime = DateTime.Parse(collection["DueDateTime"]),
+                    CreatedBy = User.Identity.Name,
+                    CreatedWhen = DateTime.Now,
+                    Done = false,
+                    AssignedTo = User.Identity.Name
+                };
+
+                await _todoRepository.Create(todo);
+                
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
+                Logger.Error(e, "Exception occured.");
+
                 return View();
             }
         }
@@ -63,21 +88,32 @@ namespace GroupOneToDo.WebUI.Controllers
         // GET: ToDo/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
-            return View(await _todoRepository.GetById(id));
+            var todo = await _todoRepository.GetById(id);
+
+            return View(todo);
         }
 
         // POST: ToDo/Edit/5
         [HttpPost]
-        public ActionResult Edit(Guid id, FormCollection collection)
+        public async Task<ActionResult> Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
 
+                var existing = await _todoRepository.GetById(id);
+
+                existing.Task = collection["Task"];
+                existing.DueDateTime = DateTime.Parse(collection["DueDateTime"]);
+                existing.Done = Boolean.Parse(collection["Done"].Split(',')[0]);
+
+                await _todoRepository.Update(existing);
+ 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
+                Logger.Error(e, "Can't save edited ToDo.");
+
                 return View();
             }
         }
